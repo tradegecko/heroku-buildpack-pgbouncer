@@ -3,6 +3,7 @@
 POSTGRES_URLS=${PGBOUNCER_URLS:-DATABASE_URL}
 POOL_MODE=${PGBOUNCER_POOL_MODE:-transaction}
 SERVER_RESET_QUERY=${PGBOUNCER_SERVER_RESET_QUERY}
+SSLMODE=${PGBOUNCER_SSLMODE:-prefer}
 n=1
 
 # if the SERVER_RESET_QUERY and pool mode is session, pgbouncer recommends DISCARD ALL be the default
@@ -17,7 +18,7 @@ listen_addr = 127.0.0.1
 listen_port = 6000
 auth_type = md5
 auth_file = /app/vendor/pgbouncer/users.txt
-server_tls_sslmode = prefer
+server_tls_sslmode = ${SSLMODE}
 server_tls_protocols = secure
 server_tls_ciphers = HIGH:!ADH:!AECDH:!LOW:!EXP:!MD5:!3DES:!SRP:!PSK:@STRENGTH
 
